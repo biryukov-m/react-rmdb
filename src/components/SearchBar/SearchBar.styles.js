@@ -25,7 +25,7 @@ export const Content = styled.div`
     }
 
     input {
-        font-size: 28px;
+        font-size: var(--fontBig);
         position: absolute;
         left: 0;
         margin: 8px 0;
@@ -36,7 +36,7 @@ export const Content = styled.div`
         height: 40px;
         color: var(--white);
         
-        :focus{
+        :focus {
             outline: none;
         }
     }
