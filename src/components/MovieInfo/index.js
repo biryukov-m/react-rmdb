@@ -7,6 +7,7 @@ import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
 import NoImage from '../../images/no_image.jpg';
 // Styles
 import { Wrapper, Content, Text } from './MovieInfo.styles';
+import PropTypes from 'prop-types';
 
 const MovieInfo = ({ movie }) => (
     <Wrapper backdrop={movie.backdrop_path}>
@@ -39,5 +40,9 @@ const MovieInfo = ({ movie }) => (
         </Content>
     </Wrapper>
 );
+
+MovieInfo.propTypes = {
+    movie: PropTypes.object
+};
 
 export default MovieInfo;
