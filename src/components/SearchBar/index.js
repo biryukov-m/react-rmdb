@@ -29,7 +29,7 @@ class SearchBar extends React.Component {
                         type='text'
                         placeholder='Search Movie'
                         onChange={e => this.setState({ value: e.currentTarget.value })}
-                        value={this.state}
+                        value={this.state.value}
                     />
                 </Content>
             </Wrapper >
