@@ -40,6 +40,11 @@ export const Text = styled.div`
     color: var(--white);
     overflow: hidden;
 
+    h1 span {
+        color: var(--lightGrey);
+        font-size: var(--fontBig);
+    }
+
     .rating-directors {
         display: flex;
         justify-content: flex-start;

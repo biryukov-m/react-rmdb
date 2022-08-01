@@ -23,6 +23,8 @@ const MovieInfo = ({ movie }) => {
         console.log(rate);
     };
 
+    const movieYear = new Date(movie.release_date.split('-')).getFullYear();
+
     return (
         <Wrapper backdrop={movie.backdrop_path}>
             <Content>
@@ -35,7 +37,7 @@ const MovieInfo = ({ movie }) => {
                     clickable={false}
                 />
                 <Text>
-                    <h1>{movie.title}</h1>
+                    <h1>{movie.title} <span>({movieYear})</span></h1>
                     <h3>PLOT</h3>
                     <p>{movie.overview}</p>
                     <div className="rating-directors">
