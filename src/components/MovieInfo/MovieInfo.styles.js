@@ -47,7 +47,10 @@ export const Text = styled.div`
 
     .rating-directors {
         display: flex;
-        justify-content: flex-start;
+        justify-content: flex-start;     
+        div {
+            margin-right: 30px;
+        }
     }
     
     .score {
@@ -63,8 +66,26 @@ export const Text = styled.div`
         margin: 0;
     }
 
+    .votes {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        background: none;
+        color: #fff;
+        font-weight: 800;
+        border-radius: 50%;
+        margin: 0;
+    }
+
     .director {
-        margin: 0 0 0 40px;
+        div {
+            display: flex;
+            flex-direction: column;
+            min-height: 35px;
+            justify-content: center;
+        }
         p {
             margin: 0;
         }

@@ -45,10 +45,16 @@ const MovieInfo = ({ movie }) => {
                             <h3>RATING</h3>
                             <div className="score">{movie.vote_average.toFixed(2)}</div>
                         </div>
+                        <div>
+                            <h3>VOTES</h3>
+                            <div className="votes">{movie.vote_count}</div>
+                        </div>
                         <div className="director">
                             <h3>DIRECTOR{movie.directors.length > 1 ? 'S' : ''}</h3>
                             {movie.directors.map(director => (
-                                <p key={director.credit_id}>{director.name}</p>
+                                <div>
+                                    <p key={director.credit_id}>{director.name}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
