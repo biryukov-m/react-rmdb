@@ -15,19 +15,23 @@ const Header = () => {
     return (
         <Wrapper>
             <Content>
-                <Link to='/'>
-                    <LogoImg src={RMDBLogo} alt='rmdb-logo' />
-                </Link>
-                {
-                    user ? (
-                        <span>Logged in as {user.username}</span>
-                    ) : (
-                        <Link to='/login'>
-                            <span>Log in</span>
-                        </Link>
-                    )
-                }
-                <TMDBLogoImg src={TMDBLogo} alt='tmdb-logo' />
+                <div className='logos'>
+                    <Link to='/'>
+                        <LogoImg src={RMDBLogo} alt='rmdb-logo' />
+                    </Link>
+                    <TMDBLogoImg src={TMDBLogo} alt='tmdb-logo' />
+                </div>
+                <div className='user'>
+                    {
+                        user ? (
+                            <span>Logged in as {user.username}</span>
+                        ) : (
+                            <Link to='/login'>
+                                <span>Log in</span>
+                            </Link>
+                        )
+                    }
+                </div>
             </Content>
         </Wrapper>
     );
