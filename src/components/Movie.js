@@ -9,6 +9,7 @@ import Spinner from './Spinner';
 import MovieInfo from './MovieInfo';
 import MovieInfoBar from './MovieInfoBar';
 import Actor from './Actor';
+import Collection from './Collection';
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
 // Image
@@ -27,6 +28,7 @@ const Movie = () => {
                 time={movie.runtime}
                 budget={movie.budget}
                 revenue={movie.revenue} />
+
             <Grid header='Actors'>
                 {movie.actors.map(actor => (
                     <Actor
@@ -40,6 +42,25 @@ const Movie = () => {
                     />
                 ))}
             </Grid>
+
+            {movie.belongs_to_collection.id &&
+                <Grid header='Collections'>
+                    <Collection
+                        id={movie.belongs_to_collection.id}
+                        name={movie.belongs_to_collection.name}
+                        poster_path={movie.belongs_to_collection.poster_path
+                            ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.belongs_to_collection.poster_path}`
+                            : NoImage
+                        }
+                        backdrop_path={movie.belongs_to_collection.backdrop_path
+                            ?
+                            `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.belongs_to_collection.backdrop_path}`
+                            : NoImage
+                        }
+                    />
+                </Grid>
+            }
+
         </>
     );
 };
