@@ -7,8 +7,8 @@ export const useMovieFetch = (movieId) => {
     const [state, setState] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [actorsCompact, setActorsCompact] = useState(true);
     const [actorsDisplayCount, setActorsDisplayCount] = useState(5);
+    const [displayCollectionId, setDisplayCollectionId] = useState(null);
 
 
     useEffect(() => {
@@ -36,6 +36,8 @@ export const useMovieFetch = (movieId) => {
             }
         };
 
+        setActorsDisplayCount(5);
+
         const sessionState = isPersistedState(movieId);
         if (sessionState) {
             setState(sessionState);
@@ -56,10 +58,10 @@ export const useMovieFetch = (movieId) => {
         state,
         loading,
         error,
-        actorsCompact,
-        setActorsCompact,
         actorsDisplayCount,
-        setActorsDisplayCount
+        setActorsDisplayCount,
+        displayCollectionId,
+        setDisplayCollectionId
     };
 
 };

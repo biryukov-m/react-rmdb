@@ -1,11 +1,11 @@
 import React from 'react';
-import { Wrapper, Image } from './Collection.styles';
+import { Image } from './Collection.styles';
+import { Link } from 'react-router-dom';
 
-const Collection = ({ id, name, poster_path, backdrop_path }) => (
-    <Wrapper>
-        <Image src={poster_path} />
-        <a>{name}</a>
-    </Wrapper>
+const Collection = ({ id, name, poster_path, backdrop_path, callback }) => (
+    <Link to=''>
+        <Image src={poster_path} alt="collection-thumb" onClick={callback} />
+    </Link>
 );
 
 export default Collection;

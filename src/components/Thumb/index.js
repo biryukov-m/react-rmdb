@@ -8,7 +8,7 @@ const Thumb = ({ image, movieId, clickable }) => (
     <div>
         {clickable ? (
             <Link to={`/${movieId}`}>
-                <Image src={image} alt="movie-thumb" />
+                <Image onClick={() => (window.scrollTo(0, 0))} src={image} alt="movie-thumb" />
             </Link>
         ) : (
             <Image src={image} alt="movie-thumb" />

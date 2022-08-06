@@ -12,6 +12,8 @@ import Actor from './Actor';
 import Collection from './Collection';
 import Button from './Button';
 import ButtonsGrid from './ButtonsGrid';
+import CollectionInfo from './CollectionInfo';
+
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
 // Image
@@ -24,7 +26,9 @@ const Movie = () => {
         loading,
         error,
         actorsDisplayCount,
-        setActorsDisplayCount
+        setActorsDisplayCount,
+        displayCollectionId,
+        setDisplayCollectionId
     } = useMovieFetch(movieId);
 
     const actors = movie.actors ? movie.actors.slice(0, actorsDisplayCount) : null;
@@ -88,9 +92,12 @@ const Movie = () => {
                             `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.belongs_to_collection.backdrop_path}`
                             : NoImage
                         }
+                        callback={() => setDisplayCollectionId(movie.belongs_to_collection.id)}
                     />
                 </Grid>
             }
+
+            {displayCollectionId && <CollectionInfo collectionId={displayCollectionId} />}
 
         </>
     );
