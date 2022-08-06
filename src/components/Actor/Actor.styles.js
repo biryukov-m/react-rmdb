@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 export const Image = styled.img`
     display: block;
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
     border-radius: 15px;
 `;
