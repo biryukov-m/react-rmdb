@@ -54,7 +54,7 @@ const Home = () => {
             </Grid>
             {loading && <Spinner />}
             {state.page < state.total_pages && !loading && (
-                <Button text='Load more' callback={() => setIsLoadingMore(true)} />
+                <Button text='Load more' position="center" callback={() => setIsLoadingMore(true)} />
             )}
         </>
     )

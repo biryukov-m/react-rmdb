@@ -3,16 +3,17 @@ import React from "react";
 import { Wrapper } from "./Button.styles";
 import PropTypes from 'prop-types';
 
-const Button = ({ text, callback }) => (
-    <Wrapper type='button' onClick={callback}>
+const Button = ({ text, callback, size, position }) => (
+    <Wrapper size={size} position={position} type='button' onClick={callback}>
         {text}
-
     </Wrapper>
 );
 
 Button.propTypes = {
     text: PropTypes.string,
-    callback: PropTypes.func
+    callback: PropTypes.func,
+    size: PropTypes.string,
+    position: PropTypes.string,
 };
 
 export default Button;

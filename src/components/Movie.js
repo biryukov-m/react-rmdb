@@ -11,6 +11,7 @@ import MovieInfoBar from './MovieInfoBar';
 import Actor from './Actor';
 import Collection from './Collection';
 import Button from './Button';
+import ButtonsGrid from './ButtonsGrid';
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
 // Image
@@ -25,9 +26,11 @@ const Movie = () => {
         actorsDisplayCount,
         setActorsDisplayCount
     } = useMovieFetch(movieId);
+
+    const actors = movie.actors ? movie.actors.slice(0, actorsDisplayCount) : null;
+
     if (loading) return <Spinner />;
     if (error) return <div>Something went wrong.</div>;
-    const actors = movie.actors.slice(0, actorsDisplayCount);
 
 
     return (
@@ -53,14 +56,25 @@ const Movie = () => {
                 ))}
             </Grid>
 
-            {movie.actors.length > actors.length &&
-                <Button
-                    text={`Load more (${movie.actors.length - actors.length})`}
-                    callback={() => setActorsDisplayCount(prevCount => prevCount + 10)}
-                />
+            {movie.actors &&
+                <ButtonsGrid>
+                    {(movie.actors.length > actors.length) &&
+                        <Button
+                            size="small"
+                            text={`Load more (${movie.actors.length - actors.length})`}
+                            callback={() => setActorsDisplayCount(prevCount => prevCount + 10)}
+                        />}
+                    {actors.length > 5 &&
+                        <Button
+                            size="small"
+                            text={`Minimize`}
+                            callback={() => setActorsDisplayCount(5)}
+                        />}
+
+                </ButtonsGrid>
             }
 
-            {movie.belongs_to_collection.id &&
+            {movie.belongs_to_collection &&
                 <Grid header='Collections'>
                     <Collection
                         id={movie.belongs_to_collection.id}
