@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import API from '../API';
 
-const initialState = {
-    results: []
-};
-
 export const useCollectionFetch = (collectionId) => {
-    const [state, setState] = useState(initialState);
+    const [state, setState] = useState({});
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 

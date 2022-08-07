@@ -8,8 +8,6 @@ export const useMovieFetch = (movieId) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [actorsDisplayCount, setActorsDisplayCount] = useState(5);
-    const [displayCollectionId, setDisplayCollectionId] = useState(null);
-
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -60,8 +58,6 @@ export const useMovieFetch = (movieId) => {
         error,
         actorsDisplayCount,
         setActorsDisplayCount,
-        displayCollectionId,
-        setDisplayCollectionId
     };
 
 };

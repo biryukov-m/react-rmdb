@@ -3,7 +3,6 @@ import { Image } from './Thumb.styles';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-
 const Thumb = ({ image, movieId, clickable }) => (
     <div>
         {clickable ? (

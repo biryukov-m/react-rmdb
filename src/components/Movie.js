@@ -9,11 +9,9 @@ import Spinner from './Spinner';
 import MovieInfo from './MovieInfo';
 import MovieInfoBar from './MovieInfoBar';
 import Actor from './Actor';
-import Collection from './Collection';
 import Button from './Button';
 import ButtonsGrid from './ButtonsGrid';
 import CollectionInfo from './CollectionInfo';
-
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
 // Image
@@ -27,15 +25,12 @@ const Movie = () => {
         error,
         actorsDisplayCount,
         setActorsDisplayCount,
-        displayCollectionId,
-        setDisplayCollectionId
     } = useMovieFetch(movieId);
 
     const actors = movie.actors ? movie.actors.slice(0, actorsDisplayCount) : null;
 
     if (loading) return <Spinner />;
     if (error) return <div>Something went wrong.</div>;
-
 
     return (
         <>
@@ -45,7 +40,6 @@ const Movie = () => {
                 time={movie.runtime}
                 budget={movie.budget}
                 revenue={movie.revenue} />
-
             <Grid header='Actors'>
                 {actors.map(actor => (
                     <Actor
@@ -59,7 +53,6 @@ const Movie = () => {
                     />
                 ))}
             </Grid>
-
             {movie.actors &&
                 <ButtonsGrid>
                     {(movie.actors.length > actors.length) &&
@@ -74,34 +67,13 @@ const Movie = () => {
                             text={`Minimize`}
                             callback={() => setActorsDisplayCount(5)}
                         />}
-
                 </ButtonsGrid>
             }
-
             {movie.belongs_to_collection &&
-                <Grid header='Collections'>
-                    <Collection
-                        id={movie.belongs_to_collection.id}
-                        name={movie.belongs_to_collection.name}
-                        poster_path={movie.belongs_to_collection.poster_path
-                            ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.belongs_to_collection.poster_path}`
-                            : NoImage
-                        }
-                        backdrop_path={movie.belongs_to_collection.backdrop_path
-                            ?
-                            `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.belongs_to_collection.backdrop_path}`
-                            : NoImage
-                        }
-                        callback={() => setDisplayCollectionId(movie.belongs_to_collection.id)}
-                    />
-                </Grid>
+                <CollectionInfo collectionId={movie.belongs_to_collection.id} />
             }
-
-            {displayCollectionId && <CollectionInfo collectionId={displayCollectionId} />}
-
         </>
     );
 };
-
 
 export default Movie;
