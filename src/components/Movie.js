@@ -12,6 +12,7 @@ import Actor from './Actor';
 import Button from './Button';
 import ButtonsGrid from './ButtonsGrid';
 import CollectionInfo from './CollectionInfo';
+import Recomendations from "./Recomendations";
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
 // Image
@@ -69,6 +70,7 @@ const Movie = () => {
                         />}
                 </ButtonsGrid>
             }
+            <Recomendations movieId={movie.id} />
             {movie.belongs_to_collection &&
                 <CollectionInfo collectionId={movie.belongs_to_collection.id} />
             }

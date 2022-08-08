@@ -18,7 +18,7 @@ const Thumb = ({ image, movieId, clickable }) => (
 Thumb.propTypes = {
     image: PropTypes.string,
     movieId: PropTypes.number,
-    clackable: PropTypes.bool
+    clickable: PropTypes.bool
 };
 
 export default Thumb;
