@@ -11,7 +11,6 @@ import MovieInfoBar from './MovieInfoBar';
 import Actor from './Actor';
 import Button from './Button';
 import ButtonsGrid from './ButtonsGrid';
-import CollectionInfo from './CollectionInfo';
 import Thumb from "./Thumb";
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
@@ -30,11 +29,12 @@ const Movie = () => {
         setRecommendationsDisplayCount,
     } = useMovieFetch(movieId);
 
-
     if (loading) return <Spinner />;
     if (error) return <div>Something went wrong.</div>;
 
-    const actorsShort = movie.actors ? movie.actors.slice(0, actorsDisplayCount) : null;
+    const actorsShort = movie.actors ?
+        movie.actors.slice(0, actorsDisplayCount)
+        : null;
     const recommendationsShort = movie.recommendations.results ?
         movie.recommendations.results.slice(0, recommendationsDisplayCount)
         : null;
@@ -103,9 +103,23 @@ const Movie = () => {
                         callback={() => setRecommendationsDisplayCount(5)}
                     />}
             </ButtonsGrid>
-            {movie.belongs_to_collection &&
-                <CollectionInfo collectionId={movie.belongs_to_collection.id} />
+            {movie.collection &&
+                <Grid header={movie.collection.name}>
+                    {movie.collection.parts.map(movie => (
+                        <Thumb
+                            key={movie.id}
+                            clickable
+                            image={
+                                movie.poster_path
+                                    ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                                    : NoImage
+                            }
+                            movieId={movie.id}
+                        />
+                    ))}
+                </Grid>
             }
+
         </>
     );
 };

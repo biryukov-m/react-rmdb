@@ -17,20 +17,23 @@ export const useMovieFetch = (movieId) => {
                 setError(false);
                 const movie = await API.fetchMovie(movieId);
                 const credits = await API.fetchCredits(movieId);
-                const recommendations = await API.fetchRecomendations(movieId);
-
                 // Get directors only
                 const directors = credits.crew.filter(
                     member => member.job === 'Director'
                 );
+                const recommendations = await API.fetchRecomendations(movieId);
+                // Check if movie belongs to collection and get it
+                const collection = movie.belongs_to_collection ?
+                    await API.fetchCollection(movie.belongs_to_collection.id)
+                    : null;
 
                 setState({
                     ...movie,
                     actors: credits.cast,
                     directors,
-                    recommendations
+                    recommendations,
+                    collection: collection
                 });
-
                 setLoading(false);
             }
             catch (error) {
