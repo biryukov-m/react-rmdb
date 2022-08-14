@@ -8,6 +8,7 @@ export const useMovieFetch = (movieId) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [actorsDisplayCount, setActorsDisplayCount] = useState(5);
+    const [recommendationsDisplayCount, setRecommendationsDisplayCount] = useState(5);
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -16,6 +17,8 @@ export const useMovieFetch = (movieId) => {
                 setError(false);
                 const movie = await API.fetchMovie(movieId);
                 const credits = await API.fetchCredits(movieId);
+                const recommendations = await API.fetchRecomendations(movieId);
+
                 // Get directors only
                 const directors = credits.crew.filter(
                     member => member.job === 'Director'
@@ -24,7 +27,8 @@ export const useMovieFetch = (movieId) => {
                 setState({
                     ...movie,
                     actors: credits.cast,
-                    directors
+                    directors,
+                    recommendations
                 });
 
                 setLoading(false);
@@ -35,6 +39,7 @@ export const useMovieFetch = (movieId) => {
         };
 
         setActorsDisplayCount(5);
+        setRecommendationsDisplayCount(5);
 
         const sessionState = isPersistedState(movieId);
         if (sessionState) {
@@ -58,6 +63,8 @@ export const useMovieFetch = (movieId) => {
         error,
         actorsDisplayCount,
         setActorsDisplayCount,
+        recommendationsDisplayCount,
+        setRecommendationsDisplayCount
     };
 
 };

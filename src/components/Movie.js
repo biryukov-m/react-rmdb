@@ -12,7 +12,7 @@ import Actor from './Actor';
 import Button from './Button';
 import ButtonsGrid from './ButtonsGrid';
 import CollectionInfo from './CollectionInfo';
-import Recomendations from "./Recomendations";
+import Thumb from "./Thumb";
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
 // Image
@@ -26,12 +26,18 @@ const Movie = () => {
         error,
         actorsDisplayCount,
         setActorsDisplayCount,
+        recommendationsDisplayCount,
+        setRecommendationsDisplayCount,
     } = useMovieFetch(movieId);
 
-    const actors = movie.actors ? movie.actors.slice(0, actorsDisplayCount) : null;
 
     if (loading) return <Spinner />;
     if (error) return <div>Something went wrong.</div>;
+
+    const actorsShort = movie.actors ? movie.actors.slice(0, actorsDisplayCount) : null;
+    const recommendationsShort = movie.recommendations.results ?
+        movie.recommendations.results.slice(0, recommendationsDisplayCount)
+        : null;
 
     return (
         <>
@@ -42,7 +48,7 @@ const Movie = () => {
                 budget={movie.budget}
                 revenue={movie.revenue} />
             <Grid header='Actors'>
-                {actors.map(actor => (
+                {actorsShort.map(actor => (
                     <Actor
                         key={actor.credit_id}
                         name={actor.name}
@@ -56,13 +62,13 @@ const Movie = () => {
             </Grid>
             {movie.actors &&
                 <ButtonsGrid>
-                    {(movie.actors.length > actors.length) &&
+                    {(movie.actors.length > actorsShort.length) &&
                         <Button
                             size="small"
-                            text={`Load more (${movie.actors.length - actors.length})`}
+                            text={`Load more`}
                             callback={() => setActorsDisplayCount(prevCount => prevCount + 10)}
                         />}
-                    {actors.length > 5 &&
+                    {actorsShort.length > 5 &&
                         <Button
                             size="small"
                             text={`Minimize`}
@@ -70,7 +76,33 @@ const Movie = () => {
                         />}
                 </ButtonsGrid>
             }
-            <Recomendations movieId={movie.id} />
+            <Grid header="Recommendations">
+                {recommendationsShort.map(movie => (
+                    <Thumb
+                        key={movie.id}
+                        image={movie.poster_path
+                            ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                            : NoImage
+                        }
+                        movieId={movie.id}
+                        clickable
+                    />
+                ))}
+            </Grid>
+            <ButtonsGrid>
+                {(movie.recommendations.results.length > recommendationsShort.length) &&
+                    <Button
+                        size="small"
+                        text={`Load more`}
+                        callback={() => setRecommendationsDisplayCount(prevCount => prevCount + 5)}
+                    />}
+                {recommendationsShort.length > 5 &&
+                    <Button
+                        size="small"
+                        text={`Minimize`}
+                        callback={() => setRecommendationsDisplayCount(5)}
+                    />}
+            </ButtonsGrid>
             {movie.belongs_to_collection &&
                 <CollectionInfo collectionId={movie.belongs_to_collection.id} />
             }
