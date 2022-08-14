@@ -12,6 +12,7 @@ import Actor from './Actor';
 import Button from './Button';
 import ButtonsGrid from './ButtonsGrid';
 import Thumb from "./Thumb";
+import Reviews from "./Reviews";
 // Hook
 import { useMovieFetch } from "../hooks/useMovieFetch";
 // Image
@@ -26,7 +27,7 @@ const Movie = () => {
         actorsDisplayCount,
         setActorsDisplayCount,
         recommendationsDisplayCount,
-        setRecommendationsDisplayCount,
+        setRecommendationsDisplayCount
     } = useMovieFetch(movieId);
 
     if (loading) return <Spinner />;
@@ -120,6 +121,12 @@ const Movie = () => {
                 </Grid>
             }
 
+            {movie.reviews.total_results &&
+                <Reviews
+                    results={movie.reviews.results}
+
+                />
+            }
         </>
     );
 };

@@ -22,6 +22,7 @@ export const useMovieFetch = (movieId) => {
                     member => member.job === 'Director'
                 );
                 const recommendations = await API.fetchRecomendations(movieId);
+                const reviews = await API.fetchReviews(movieId);
                 // Check if movie belongs to collection and get it
                 const collection = movie.belongs_to_collection ?
                     await API.fetchCollection(movie.belongs_to_collection.id)
@@ -32,7 +33,8 @@ export const useMovieFetch = (movieId) => {
                     actors: credits.cast,
                     directors,
                     recommendations,
-                    collection: collection
+                    collection: collection,
+                    reviews: reviews
                 });
                 setLoading(false);
             }

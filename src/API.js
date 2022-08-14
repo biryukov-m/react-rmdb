@@ -38,6 +38,10 @@ const apiSettings = {
     const endpoint = `${API_URL}movie/${movieId}/recommendations?api_key=${API_KEY}`;
     return await (await fetch(endpoint)).json();
   },
+  fetchReviews: async movieId => {
+    const endpoint = `${API_URL}movie/${movieId}/reviews?api_key=${API_KEY}`;
+    return await (await fetch(endpoint)).json();
+  },
   getRequestToken: async () => {
     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
     return reqToken.request_token;
