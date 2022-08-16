@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import API from '../API';
 import { isPersistedState } from "../helpers";
+import { BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
 
 
 export const useMovieFetch = (movieId) => {
@@ -27,6 +28,17 @@ export const useMovieFetch = (movieId) => {
                 const collection = movie.belongs_to_collection ?
                     await API.fetchCollection(movie.belongs_to_collection.id)
                     : null;
+
+                reviews.results.map((result) => {
+                    const path = result.author_details.avatar_path;
+                    if (path) {
+                        result.author_details.avatar_path =
+                            path.includes('http') ?
+                                path.replace(/^\/http/, 'http')
+                                : `${IMAGE_BASE_URL}${BACKDROP_SIZE}${path}`;
+                    }
+                    return null;
+                });
 
                 setState({
                     ...movie,

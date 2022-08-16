@@ -12,8 +12,9 @@ const Reviews = ({ results }) => {
                 {results.map(review => (
                     <Content>
                         <div className="author">
-                            <img src={NoImage} />
-                            <img src={review.author_details.avatar_path.slice(1)} />
+                            <img src={review.author_details.avatar_path ?
+                                review.author_details.avatar_path
+                                : NoImage} />
                             <h3>{review.author}</h3>
                         </div>
                         {review.content.length > 250 ?
