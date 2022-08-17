@@ -40,14 +40,14 @@ const Movie = () => {
         movie.recommendations.results.slice(0, recommendationsDisplayCount)
         : null;
 
-    return (
-        <>
-            <BreadCrumb movieTitle={movie.original_title} />
-            <MovieInfo movie={movie} />
-            <MovieInfoBar
-                time={movie.runtime}
-                budget={movie.budget}
-                revenue={movie.revenue} />
+    return (<>
+        <BreadCrumb movieTitle={movie.original_title} />
+        <MovieInfo movie={movie} />
+        <MovieInfoBar
+            time={movie.runtime}
+            budget={movie.budget}
+            revenue={movie.revenue} />
+        {movie.actors && <>
             <Grid header='Actors'>
                 {actorsShort.map(actor => (
                     <Actor
@@ -61,22 +61,22 @@ const Movie = () => {
                     />
                 ))}
             </Grid>
-            {movie.actors &&
-                <ButtonsGrid>
-                    {(movie.actors.length > actorsShort.length) &&
-                        <Button
-                            size="small"
-                            text={`Load more`}
-                            callback={() => setActorsDisplayCount(prevCount => prevCount + 10)}
-                        />}
-                    {actorsShort.length > 5 &&
-                        <Button
-                            size="small"
-                            text={`Minimize`}
-                            callback={() => setActorsDisplayCount(5)}
-                        />}
-                </ButtonsGrid>
-            }
+            <ButtonsGrid>
+                {(movie.actors.length > actorsShort.length) &&
+                    <Button
+                        size="small"
+                        text={`Load more`}
+                        callback={() => setActorsDisplayCount(prevCount => prevCount + 10)}
+                    />}
+                {actorsShort.length > 5 &&
+                    <Button
+                        size="small"
+                        text={`Minimize`}
+                        callback={() => setActorsDisplayCount(5)}
+                    />}
+            </ButtonsGrid>
+        </>}
+        {recommendationsShort && <>
             <Grid header="Recommendations">
                 {recommendationsShort.map(movie => (
                     <Thumb
@@ -104,31 +104,28 @@ const Movie = () => {
                         callback={() => setRecommendationsDisplayCount(5)}
                     />}
             </ButtonsGrid>
-            {movie.collection &&
-                <Grid header={movie.collection.name}>
-                    {movie.collection.parts.map(movie => (
-                        <Thumb
-                            key={movie.id}
-                            clickable
-                            image={
-                                movie.poster_path
-                                    ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
-                                    : NoImage
-                            }
-                            movieId={movie.id}
-                        />
-                    ))}
-                </Grid>
-            }
-
-            {movie.reviews.total_results &&
-                <Reviews
-                    results={movie.reviews.results}
-
-                />
-            }
         </>
-    );
+        }
+        {movie.collection &&
+            <Grid header={movie.collection.name}>
+                {movie.collection.parts.map(movie => (
+                    <Thumb
+                        key={movie.id}
+                        clickable
+                        image={
+                            movie.poster_path
+                                ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                                : NoImage
+                        }
+                        movieId={movie.id}
+                    />
+                ))}
+            </Grid>
+        }
+        {movie.reviews.total_results &&
+            <Reviews results={movie.reviews.results} />
+        }
+    </>);
 };
 
 export default Movie;

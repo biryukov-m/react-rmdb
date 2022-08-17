@@ -13,36 +13,41 @@ export const Wrapper = styled.div`
 `;
 export const Container = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
+
 `;
 export const Content = styled.div`
-    border-radius: 20px;
-    border: 1px solid var(--medGrey);
-    padding: 20px;
     .author {
         display: flex;
         align-items: center;
-        margin: 0 0 10px 0;
-
+        box-shadow: 0 0 1px rgb(0 0 0 / 12%);
+        border: 1px solid var(--lightGrey);
+        border-bottom: none;
+        padding: 3px 5px 3px 10px;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
         img {
-            height: 70px;
-            width: 70px;
+            height: 40px;
+            width: 40px;
             border-radius: 50%;
             margin-right: 10px;
         }
         h3 {
+            margin: 0;
         }
     }
-
     :hover {
         opacity: 0.9;
     }
-    
-
 `;
 
-export const Text = styled.span`
-        cursor: pointer;
-        font-size: var(--fontSmall);
+export const Text = styled.div`
+    cursor: pointer;
+    font-size: var(--fontSmall);
+    box-shadow: 0 0 1px rgb(0 0 0 / 12%);
+    border: 1px solid var(--lightGrey);
+    padding: 5px 5px 5px 10px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 `;

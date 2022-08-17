@@ -25,7 +25,7 @@ const Reviews = ({ results }) => {
                                 : <Text onClick={() => (setExpandReviewId(review.id))}>
                                     {review.content.substring(0, 250)}...
                                 </Text>
-                            : review.content}
+                            : <Text>{review.content}</Text>}
                     </Content>
                 ))}
             </Container>
